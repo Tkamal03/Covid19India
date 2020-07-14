@@ -6,7 +6,8 @@ class GetData extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            searchValue: props.value
         };
     }
 
@@ -29,9 +30,11 @@ class GetData extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, items, searchValue } = this.state;
         const tempArray = [];
-        var test = "nilgiris"
+        var test = "Chennai"
+        // console.log(searchValue);
+        // console.log(items);
         // return <div>items</div>
 
         if (error) {
@@ -39,26 +42,35 @@ class GetData extends React.Component {
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
+            var testData = '';
 
             {
-                items.find((v,i)=>{
-                    if(v.detecteddistrict.toLowerCase() == test){
-                        console.log(v);
+                items.find((v, i) => {
+
+                    if (v.detecteddistrict.split(" ").join("").toLowerCase() == test.split(" ").join("").toLowerCase()) {
+                        testData = v;
                     }
-                }) ;
-                items.map(item => {
-                    // console.log(item);
-                    
-                    tempArray.push({ state: item.detectedstate, state_code: item.statecode, district: item.detecteddistrict });
-                })
+                    else if (v.detectedstate.split(" ").join("").toLowerCase() == test.split(" ").join("").toLowerCase()) {
+                        testData = v;
+                    }
+
+                    tempArray.push({ state: testData.detectedstate, state_code: testData.statecode, district: testData.detecteddistrict });
+
+                });
+
+                var tempData = tempArray.filter(function (element) {
+                    // console.log(element);
+                    return element.state !== undefined || element.state_code !== undefined || element.district !== undefined;
+                });
+                console.log(tempData);
             };
-            // console.log(tempArray);
+
             return (
                 <ul>
-                    {tempArray.map((item, i) => (
+                    {tempData.map((item, i) => (
                         <li key={i}>
 
-                            {item.state} --- {item.state_code} --- {item.district}
+                            State : {item.state} --- State Code : {item.state_code} --- District : {item.district}
                         </li>
                     ))}
                 </ul>
