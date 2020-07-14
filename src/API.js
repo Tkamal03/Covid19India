@@ -42,7 +42,6 @@ class GetData extends React.Component {
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
-
             var testData = '';
 
             {
