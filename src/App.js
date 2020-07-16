@@ -1,10 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
-import GetData from './API'
+import GetData from "./API";
+
+
 // import { Glyphicon } from 'react-bootstrap';
 
-
+//Components
+import Content from "./Layout_Components/content";
+//import GetData from "./API";
 // function SearchData(event){
 //   this.setState({searchKey: event.targt.value});
 // }
@@ -37,7 +42,7 @@ import GetData from './API'
 function App() {
   return (
     <React.Fragment>
-
+      <Content />
       {/* <div><Formdata /> </div> */}
       <GetData />
     </React.Fragment>

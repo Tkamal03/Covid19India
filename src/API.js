@@ -6,18 +6,44 @@ class GetData extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: [],
-            searchValue: props.value
+            stateData: [],
+            districtData: []
         };
     }
 
     componentDidMount() {
-        fetch("https://api.covid19india.org/raw_data8.json")
+        this.GetStateData("https://api.covid19india.org/data.json");
+        this.GetDistrictData("https://api.covid19india.org/state_district_wise.json");
+
+
+        // var stateData = PostData("https://api.covid19india.org/raw_data8.json", "");
+        // console.log(stateData);
+    }
+
+    GetStateData(url) {
+        fetch(url)
             .then(res => res.json())
             .then((result) => {
                 this.setState({
                     isLoaded: true,
-                    items: result.raw_data
+                    stateData: result
+                });
+            },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+    GetDistrictData(url) {
+        fetch(url)
+            .then(res => res.json())
+            .then((result) => {
+                this.setState({
+                    isLoaded: true,
+                    districtData: result
                 });
             },
                 (error) => {
@@ -30,11 +56,15 @@ class GetData extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, items, searchValue } = this.state;
-        const tempArray = [];
-        var test = "Chennai"
-        // console.log(searchValue);
-        // console.log(items);
+
+        const { error, isLoaded, stateData, districtData } = this.state;
+        let tempArray;
+        var tempStateList = [];
+        var count = 1;
+
+        var test = "Tamil Nadu";
+        // console.log(districtData);
+        // console.log(stateData['statewise']);
         // return <div>items</div>
 
         if (error) {
@@ -42,35 +72,34 @@ class GetData extends React.Component {
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
-            var testData = '';
-
             {
-                items.find((v, i) => {
 
-                    if (v.detecteddistrict.split(" ").join("").toLowerCase() == test.split(" ").join("").toLowerCase()) {
-                        testData = v;
-                    }
-                    else if (v.detectedstate.split(" ").join("").toLowerCase() == test.split(" ").join("").toLowerCase()) {
-                        testData = v;
-                    }
+                stateData['statewise'].forEach(element => {
 
-                    tempArray.push({ state: testData.detectedstate, state_code: testData.statecode, district: testData.detecteddistrict });
-
+                    tempStateList.push({ id: count, stateName: element.state, stateCode: element.statecode, active: element.active, confirmed: element.confirmed, recovered: element.recovered, districtList: districtData[element.state] });
+                    count++;
                 });
+                // console.log(districtData);
+                // console.log(tempStateList);
 
-                var tempData = tempArray.filter(function (element) {
-                    // console.log(element);
-                    return element.state !== undefined || element.state_code !== undefined || element.district !== undefined;
-                });
-                console.log(tempData);
+                const data = tempStateList.filter((item) => item.stateName === test);
+                if (data.length > 0) {
+                    tempArray = data;
+                }
+                else {
+                    tempArray = tempStateList;
+                }
+                console.log(tempArray);
+
             };
 
             return (
                 <ul>
-                    {tempData.map((item, i) => (
+                    {tempArray.map((item, i) => (
                         <li key={i}>
 
-                            State : {item.state} --- State Code : {item.state_code} --- District : {item.district}
+                            State : {item.stateName} --- State Code : {item.stateCode} --- Active : {item.active} ---
+                            Confirmed : {item.confirmed} --- Recovered : {item.recovered}
                         </li>
                     ))}
                 </ul>
