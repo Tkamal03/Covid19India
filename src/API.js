@@ -7,7 +7,8 @@ class GetData extends React.Component {
             error: null,
             isLoaded: false,
             stateData: [],
-            districtData: []
+            districtData: [],
+            dat:[]
         };
     }
 
@@ -18,6 +19,7 @@ class GetData extends React.Component {
 
         // var stateData = PostData("https://api.covid19india.org/raw_data8.json", "");
         // console.log(stateData);
+        // this.sendData();
     }
 
     GetStateData(url) {
@@ -55,54 +57,69 @@ class GetData extends React.Component {
             )
     }
 
-    render() {
 
-        const { error, isLoaded, stateData, districtData } = this.state;
+    sendData() {
+        const { stateData, districtData } = this.state;
+
         let tempArray;
         var tempStateList = [];
         var count = 1;
 
         var test = "Tamil Nadu";
+        // e.preventDefault();
+
+        stateData['statewise'].forEach(element => {
+
+            tempStateList.push({ id: count, stateName: element.state, stateCode: element.statecode, active: element.active, confirmed: element.confirmed, recovered: element.recovered, districtList: districtData[element.state] });
+            count++;
+        });
         // console.log(districtData);
-        // console.log(stateData['statewise']);
-        // return <div>items</div>
+        // console.log(tempStateList);
+
+        const data = tempStateList.filter((item) => item.stateName === test);
+        if (data.length > 0) {
+            tempArray = data;
+        }
+        else {
+            tempArray = tempStateList;
+        }
+        // console.log(tempArray);
+        this.props.functionCallFromParent(tempArray);
+        // this.setState({data:tempArray});
+        return tempArray;
+    }
+
+    // shouldComponentUpdate(nextProps, nextState){
+        
+    // }
+
+    render() {
+
+        const { error, isLoaded } = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
-            {
-
-                stateData['statewise'].forEach(element => {
-
-                    tempStateList.push({ id: count, stateName: element.state, stateCode: element.statecode, active: element.active, confirmed: element.confirmed, recovered: element.recovered, districtList: districtData[element.state] });
-                    count++;
-                });
-                // console.log(districtData);
-                // console.log(tempStateList);
-
-                const data = tempStateList.filter((item) => item.stateName === test);
-                if (data.length > 0) {
-                    tempArray = data;
-                }
-                else {
-                    tempArray = tempStateList;
-                }
-                console.log(tempArray);
-
-            };
-
+            
+             this.sendData();
             return (
-                <ul>
-                    {tempArray.map((item, i) => (
-                        <li key={i}>
+                <React.Fragment>
 
-                            State : {item.stateName} --- State Code : {item.stateCode} --- Active : {item.active} ---
+                    {/* {this.state.data} */}
+
+                    {/* <ul>
+                        {this.sendData().map((item, i) => (
+                            <li key={i}>
+
+                                State : {item.stateName} --- State Code : {item.stateCode} --- Active : {item.active} ---
                             Confirmed : {item.confirmed} --- Recovered : {item.recovered}
-                        </li>
-                    ))}
-                </ul>
+                            </li>
+                        ))}
+                    </ul> */}
+                    {/* <div><button onClick={this.sendData.bind(this)}>Click</button></div> */}
+                </React.Fragment>
             );
         }
     }

@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDatatable from "@ashvin27/react-datatable";
 import history from "./history";
+import GetData from "../API";
+
+
+
 
 class Table extends React.Component {
   constructor(props) {
     super(props);
     this.columns = [
       {
-        key: "state",
+        key: "stateName",
         text: "State",
         sortable: true,
       },
@@ -32,13 +36,13 @@ class Table extends React.Component {
         className: "recovered",
         TrOnlyClassName: "recoveredTr",
       },
-      {
-        key: "deceased",
-        text: "Deceased",
-        sortable: true,
-        className: "deceased",
-        TrOnlyClassName: "deceasedTr",
-      },
+      // {
+      //   key: "deceased",
+      //   text: "Deceased",
+      //   sortable: true,
+      //   className: "deceased",
+      //   TrOnlyClassName: "deceasedTr",
+      // },
       {
         text: "Action",
         className: "action",
@@ -64,7 +68,7 @@ class Table extends React.Component {
         {
           id: "1",
           shortCode: "MH",
-          state: "Maharashtra",
+          stateName: "Maharashtra",
           confirmed: "2,67,665",
           active: "1,07,665",
           recovered: "1,49,007",
@@ -73,7 +77,7 @@ class Table extends React.Component {
         {
           id: "2",
           shortCode: "TN",
-          state: "Tamil Nadu",
+          stateName: "Tamil Nadu",
           confirmed: "1,47,324",
           active: "47,915",
           recovered: "97,310",
@@ -82,7 +86,7 @@ class Table extends React.Component {
         {
           id: "3",
           shortCode: "DL",
-          state: "Delhi",
+          stateName: "Delhi",
           confirmed: "1,15,346",
           active: "18,664",
           recovered: "93,236",
@@ -91,7 +95,7 @@ class Table extends React.Component {
         {
           id: "4",
           shortCode: "KA",
-          state: "Karnataka",
+          stateName: "Karnataka",
           confirmed: "44,077",
           active: "25,836",
           recovered: "17,391",
@@ -99,7 +103,8 @@ class Table extends React.Component {
         },
       ],
     };
-
+    console.log(this.state);
+    // console.log(this.DataFromAPI);
     this.config = {
       page_size: 10,
       length_menu: [10, 20, 50],
@@ -130,18 +135,34 @@ class Table extends React.Component {
         // let stateCode = Object.keys(res);
         // console.log(stateCode);
       });
-  };
+  }
+  DataFromAPI = (APIdata) => {
+    // this.setState({data:APIdata});
+    console.log(APIdata);
+
+
+    // return this.state.APIdata;
+    // console.log(this.setState({APIdata:APIdata}));
+
+  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //       return false;
+  // }
 
   render() {
     return (
-      <ReactDatatable
-        className="table table-bordered tbl"
-        config={this.config}
-        records={this.state.records}
-        columns={this.columns}
-      />
+      <React.Fragment>
+        <ReactDatatable
+          className="table table-bordered tbl"
+          config={this.config}
+          records={this.state.records}
+          columns={this.columns}
+        />
+        <GetData functionCallFromParent={this.DataFromAPI.bind(this)} />
+      </React.Fragment>
     );
   }
 }
+
 
 export default Table;

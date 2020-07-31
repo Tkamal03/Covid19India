@@ -1,56 +1,15 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Content */
-
-.content {
-  position: relative;
-  padding-bottom: 5rem;
-}
-
-.svg-border-rounded svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3rem;
-  width: 100%;
-}
+/* Header Style */
 
 /* Header Style */
 
@@ -79,7 +38,7 @@
 }
 
 .page-header {
-  background: #fafbfc;
+  background: #f8f9fa;
   position: relative;
   padding-top: 2rem;
   padding-bottom: 4rem;
@@ -90,8 +49,7 @@
   padding: 0.5rem 0;
 }
 
-.nav-link,
-.relative {
+.nav-link, .relative {
   position: relative;
 }
 
@@ -115,20 +73,121 @@
   left: 0;
 }
 
-.dropdown-menu {
-  display: block;
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: 0.5s ease all;
+/* Header Style End */
+
+.content {
+  position: relative;
+  padding-bottom: 5rem;
 }
 
-.dropdown-menu.show {
+.svg-border-rounded svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3rem;
+  width: 100%;
+}
+
+.search-header {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
   display: block;
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0px);
-  transition: 0.5s ease all;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.form-text, .table_filter input {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-text:focus, .table_filter input:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup input {
+  padding-right: 2rem;
+}
+
+.inputGroup svg {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchText {
+  padding-right: 40px;
+}
+
+.searchBox svg {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
+.btnIcon {
+  border: 0 none;
+  background: #0070ad;
+  width: 40px;
+  height: 38px;
+  top: 4px;
+  position: relative;
+  border-radius: 0 3px 3px 0;
+  line-height: 12px;
+  left: 1px;
+}
+
+.btnIcon:focus {
+  outline: 0;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 1.6rem;
 }
 
 /* Footer Style */
@@ -153,119 +212,104 @@
   display: inline-block;
 }
 
-.footer-links li + li {
+.footer-links li+li {
   margin-left: 1rem;
 }
 
-.has-search .form-control {
-  padding-left: 2.375rem;
+/* Footer Style End */
+
+.confirmedTr, .card-confirmed {
+  background: rgba(255, 7, 58, 0.1);
 }
 
-.has-search .form-control-feedback {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  width: 2.375rem;
-  height: 2.375rem;
-  line-height: 2.375rem;
-  text-align: center;
-  pointer-events: none;
-  color: #aaa;
+.recoveredTr, .card-recovered {
+  background: rgba(40, 167, 69, 0.1);
 }
 
-.form-text,
-.table_filter input {
-  display: block;
-  width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.activeTr, .card-active {
+  background: rgba(0, 123, 255, 0.1);
 }
 
-.form-text:focus,
-.table_filter input:focus {
-  color: #495057;
-  background-color: #fff;
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+.deceasedTr, .card-deceased {
+  background: rgba(108, 117, 125, 0.1);
 }
 
-.searchBox {
-  position: relative;
+.confirmed, .confirmedTr, .card-confirmed {
+  color: #e23028 !important;
 }
 
-.searchText {
-  padding-right: 40px;
+.confirmedBdr {
+  border: 1px solid #e23028;
 }
 
-.searchBox svg {
-  position: absolute;
-  right: 12px;
-  top: 12px;
+.recovered, .recoveredTr, .card-recovered {
+  color: #28a745 !important;
 }
+
+.recoveredBdr {
+  border: 1px solid #28a745;
+}
+
+.active, .activeTr, .card-active {
+  color: #007bff !important;
+}
+
+.activeBdr {
+  border: 1px solid #007bff;
+}
+
+.deceased, .deceasedTr, .card-deceased {
+  color: #6c757d !important;
+}
+
+.deceasedBdr {
+  border: 1px solid #6c757d;
+}
+
 .tbl td.action {
   width: 100px;
 }
 
-/* Colurs Code */
-
-.confirmedTr {
-  background: rgba(255, 7, 58, 0.1);
+.result {
+  position: absolute;
+  left: 0;
+  top: 41px;
+  max-height: 250px;
+  overflow-y: auto;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0 0 3px 3px;
+  z-index: 1;
+  overflow-x: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
-.recoveredTr {
-  background: rgba(40, 167, 69, 0.1);
+.result a {
+  color: #333;
+  text-decoration: none;
+  padding: 7px 10px;
+  display: block;
 }
 
-.activeTr {
-  background: rgba(0, 123, 255, 0.1);
+.result a:hover {
+  background-color: #6c757d;
+  color: #fff;
 }
 
-.deceasedTr {
-  background: rgba(108, 117, 125, 0.1);
-}
-
-.confirmed,
-.confirmedTr {
-  color: #e23028 !important;
-}
-
-.recovered,
-.recoveredTr {
-  color: #28a745 !important;
-}
-
-.active,
-.activeTr {
-  color: #007bff !important;
-}
-
-.deceased,
-.deceasedTr {
-  color: #6c757d !important;
-}
-
-li {
-  list-style-type: none;
+.autoSuggestion {
+  position: relative;
 }
 
 /* AutoComplete UI */
+
 .autocomplete-wrapper {
   width: 100%;
   position: relative;
   display: inline-block;
 }
 
-.autocomplete-wrapper > div {
+.autocomplete-wrapper>div {
   width: 100%;
 }
 
@@ -312,14 +356,18 @@ li {
   display: block;
   cursor: pointer;
   padding: 7px;
+  display: flex;
 }
+
 .autocomplete-wrapper a {
   text-decoration: none;
   color: #333;
 }
+
 .autocomplete-wrapper .item.selected-item a {
   color: #fff;
 }
+
 .autocomplete-wrapper .item.selected-item {
   background-color: #6c757d;
   color: #fff;
@@ -329,8 +377,53 @@ li {
   background-color: #6c757d;
   color: #fff !important;
 }
+
+.searchBox {
+  position: relative;
+}
+
+.searchText {
+  padding-right: 40px;
+}
+
+.searchBox svg {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
+.dropItem {
+  width: calc(100% - 50px);
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .shortCode {
-  margin-right: 0.5rem;
-  margin-top: 3px;
   letter-spacing: 1px;
+}
+
+.fadeInUp {
+  animation-duration: 0.45s;
+  animation-fill-mode: both;
+  animation-name: fadeInUp;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-count {
+  font-size: 2rem;
+  margin-bottom: 0;
+  margin-top: 2rem;
+  font-weight: 600;
 }
